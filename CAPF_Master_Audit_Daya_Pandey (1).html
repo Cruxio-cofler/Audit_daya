@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAPF Medical Audit — Sh Daya Pandey</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap');
+
+:root {
+  --bg: #0a0e14;
+  --bg2: #111722;
+  --bg3: #1a2030;
+  --bg4: #212b3a;
+  --border: rgba(100,140,200,0.15);
+  --border2: rgba(100,140,200,0.25);
+  --text: #c8d8f0;
+  --text2: #8aa0bc;
+  --text3: #506080;
+  --accent: #4a9eff;
+  --accent2: #2d6fcc;
+  --red: #ff4f4f;
+  --red-bg: rgba(255,79,79,0.08);
+  --red-border: rgba(255,79,79,0.3);
+  --amber: #f5a623;
+  --amber-bg: rgba(245,166,35,0.08);
+  --amber-border: rgba(245,166,35,0.3);
+  --green: #3ddc84;
+  --green-bg: rgba(61,220,132,0.08);
+  --green-border: rgba(61,220,132,0.3);
+  --blue-bg: rgba(74,158,255,0.08);
+  --blue-border: rgba(74,158,255,0.3);
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'IBM Plex Sans', sans-serif;
+  --serif: 'IBM Plex Serif', serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* HEADER */
+.masthead {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border2);
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.masthead-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+
+.masthead-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.masthead-badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .1em;
+  background: var(--red-bg);
+  border: 1px solid var(--red-border);
+  color: var(--red);
+  padding: 3px 8px;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+.masthead-badge.amber {
+  background: var(--amber-bg);
+  border-color: var(--amber-border);
+  color: var(--amber);
+}
+
+.masthead-patient {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.masthead-sub {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: .05em;
+}
+
+.print-btn {
+  font-family: var(--mono);
+  font-size: 11px;
+  background: transparent;
+  border: 1px solid var(--border2);
+  color: var(--text2);
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  letter-spacing: .05em;
+}
+.print-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* HERO */
+.hero {
+  background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 40px 24px 32px;
+}
+
+.hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hero-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .15em;
+  color: var(--text3);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.hero-name {
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.hero-meta {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text3);
+  margin-bottom: 24px;
+  letter-spacing: .03em;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.stat {
+  background: var(--bg2);
+  padding: 16px 20px;
+}
+
+.stat-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .12em;
+  color: var(--text3);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.stat-value {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-value.red { color: var(--red); }
+.stat-value.amber { color: var(--amber); }
+.stat-value.green { color: var(--green); }
+.stat-value.blue { color: var(--accent); }
+
+.stat-sub {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text3);
+  margin-top: 2px;
+}
+
+/* LAYOUT */
+.layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* SIDEBAR NAV */
+.sidebar {
+  position: sticky;
+  top: 80px;
+}
+
+.nav-section {
+  margin-bottom: 24px;
+}
+
+.nav-section-title {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .15em;
+  color: var(--text3);
+  text-transform: uppercase;
+  padding: 0 8px;
+  margin-bottom: 6px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--text2);
+  transition: all .15s;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+
+.nav-item:hover { background: var(--bg3); color: var(--text); }
+.nav-item.active { background: var(--blue-bg); color: var(--accent); border-left: 2px solid var(--accent); padding-left: 6px; }
+
+.nav-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.nav-dot.red { background: var(--red); }
+.nav-dot.amber { background: var(--amber); }
+.nav-dot.green { background: var(--green); }
+.nav-dot.blue { background: var(--accent); }
+
+/* MAIN CONTENT */
+.main { min-width: 0; }
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* CARDS */
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+
+.card.flag-red { border-left: 3px solid var(--red); }
+.card.flag-amber { border-left: 3px solid var(--amber); }
+.card.flag-green { border-left: 3px solid var(--green); }
+.card.flag-blue { border-left: 3px solid var(--accent); }
+
+.card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.card-sub {
+  font-size: 12px;
+  color: var(--text2);
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.section-header {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .15em;
+  color: var(--text3);
+  text-transform: uppercase;
+  margin: 24px 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* BADGES */
+.badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .08em;
+  padding: 2px 7px;
+  border-radius: 3px;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.badge-red { background: var(--red-bg); border: 1px solid var(--red-border); color: var(--red); }
+.badge-amber { background: var(--amber-bg); border: 1px solid var(--amber-border); color: var(--amber); }
+.badge-green { background: var(--green-bg); border: 1px solid var(--green-border); color: var(--green); }
+.badge-blue { background: var(--blue-bg); border: 1px solid var(--blue-border); color: var(--accent); }
+
+/* TABLES */
+.tbl-wrap { overflow-x: auto; margin: 10px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 12px; }
+th {
+  text-align: left;
+  padding: 8px 10px;
+  background: var(--bg3);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .1em;
+  color: var(--text3);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+td {
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text2);
+  vertical-align: top;
+  line-height: 1.5;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--bg3); }
+
+.crit { color: var(--red); font-weight: 600; }
+.warn { color: var(--amber); font-weight: 500; }
+.ok { color: var(--green); font-weight: 500; }
+.mono { font-family: var(--mono); font-size: 11px; }
+
+/* HIGHLIGHT BOXES */
+.alert {
+  border-radius: 4px;
+  padding: 12px 16px;
+  margin: 10px 0;
+  font-size: 12px;
+  line-height: 1.6;
+  border: 1px solid;
+}
+.alert-red { background: var(--red-bg); border-color: var(--red-border); color: #ff8080; }
+.alert-amber { background: var(--amber-bg); border-color: var(--amber-border); color: #f5c870; }
+.alert-green { background: var(--green-bg); border-color: var(--green-border); color: #70ddaa; }
+.alert-blue { background: var(--blue-bg); border-color: var(--blue-border); color: #80bfff; }
+
+.alert strong { font-weight: 600; }
+
+/* TIMELINE */
+.timeline { margin: 10px 0; }
+.tl-item {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.tl-item:last-child { border-bottom: none; }
+.tl-date {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+  padding-top: 2px;
+}
+.tl-content { font-size: 12px; color: var(--text2); }
+.tl-title { font-weight: 600; color: var(--text); margin-bottom: 3px; font-size: 13px; }
+
+/* GRID LAYOUTS */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+
+.metric-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 14px 16px;
+}
+.metric-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .12em;
+  color: var(--text3);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.metric-val {
+  font-size: 22px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.metric-val.red { color: var(--red); }
+.metric-val.amber { color: var(--amber); }
+.metric-val.green { color: var(--green); }
+.metric-sub {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text3);
+  margin-top: 2px;
+}
+
+/* LIST */
+ul.audit-list { padding-left: 0; list-style: none; margin: 8px 0; }
+ul.audit-list li {
+  padding: 5px 0 5px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text2);
+  position: relative;
+}
+ul.audit-list li:last-child { border-bottom: none; }
+ul.audit-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--text3);
+  font-family: var(--mono);
+}
+
+/* VERDICT PANEL */
+.verdict {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  padding: 20px 24px;
+  margin: 16px 0;
+}
+.verdict-title {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .15em;
+  color: var(--text3);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+/* PROGRESS BAR */
+.progress-wrap { margin: 8px 0; }
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text3);
+  margin-bottom: 4px;
+}
+.progress-bar {
+  height: 4px;
+  background: var(--bg4);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 1s ease;
+}
+.fill-red { background: var(--red); }
+.fill-amber { background: var(--amber); }
+.fill-green { background: var(--green); }
+
+/* COLLAPSE */
+.collapsible { cursor: pointer; user-select: none; }
+.collapsible::after {
+  content: ' ▾';
+  font-size: 10px;
+  color: var(--text3);
+  font-family: var(--mono);
+}
+.collapsible.open::after { content: ' ▴'; }
+.collapse-body { overflow: hidden; transition: max-height .3s ease; }
+.collapse-body.hidden { max-height: 0 !important; }
+
+/* PRINT */
+@media print {
+  .sidebar, .masthead, .print-btn { display: none !important; }
+  .layout { grid-template-columns: 1fr !important; padding: 0; }
+  .tab-panel { display: block !important; }
+  body { background: white; color: black; }
+  .card { border: 1px solid #ccc; break-inside: avoid; }
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text3); }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-inner">
+    <div class="masthead-title">
+      <div>
+        <div class="masthead-patient">Sh Daya Pandey — CAPF Medical Audit Report</div>
+        <div class="masthead-sub">UHID: 32897 · IPD-164/25-26 · Infinity Care Hospital, Varanasi · Case: CASE/PS1/HOSP9P135565/CAPFCSPW1610178</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span class="masthead-badge">Claim Rejected</span>
+      <span class="masthead-badge amber">Resubmission Required</span>
+      <button class="print-btn" onclick="window.print()">PRINT / EXPORT PDF</button>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">Comprehensive Clinical & Financial Audit · All Documents Verified</div>
+    <div class="hero-name">Mr. Sh Daya Pandey</div>
+    <div class="hero-meta">62 Y / Male · CAPF ID: P3C3TMCVD · ABHA: 91-3653-8786-5352 · ITBP Reg: ITIT070312962 · Consultant: Dr. Abhishek Vikram Singh (UPC-56142)</div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-label">Admission</div>
+        <div class="stat-value blue" style="font-size:15px;">10 Apr 2025</div>
+        <div class="stat-sub">Emergency · 15:50 hrs</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Discharge (LAMA)</div>
+        <div class="stat-value amber" style="font-size:15px;">08 May 2025</div>
+        <div class="stat-sub">Against medical advice · 16:30 hrs</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Length of Stay</div>
+        <div class="stat-value">28 days</div>
+        <div class="stat-sub">ICU throughout · BiPAP/NIV/MV</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Amount Claimed</div>
+        <div class="stat-value red">₹13,67,708</div>
+        <div class="stat-sub">Approved package: ₹4,15,898</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Excess Claimed</div>
+        <div class="stat-value red">₹9,51,810</div>
+        <div class="stat-sub">229% above approved rate</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Defensible Estimate</div>
+        <div class="stat-value green">₹5.5L–₹7.5L</div>
+        <div class="stat-sub">After corrections & removals</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Documents Reviewed</div>
+        <div class="stat-value">11</div>
+        <div class="stat-sub">Bill, Labs, Radiology, Notes, LAMA, Emergency, Justification + more</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Critical Flags</div>
+        <div class="stat-value red">14</div>
+        <div class="stat-sub">Require action before resubmission</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="layout">
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="nav-section">
+    <div class="nav-section-title">Audit Sections</div>
+    <button class="nav-item active" onclick="showTab('overview',this)"><span class="nav-dot blue"></span>Overview & Verdicts</button>
+    <button class="nav-item" onclick="showTab('patient',this)"><span class="nav-dot blue"></span>Patient & Identity</button>
+    <button class="nav-item" onclick="showTab('clinical',this)"><span class="nav-dot red"></span>Clinical Audit (ABG/Labs)</button>
+    <button class="nav-item" onclick="showTab('bill',this)"><span class="nav-dot red"></span>Bill Audit</button>
+    <button class="nav-item" onclick="showTab('radiology',this)"><span class="nav-dot amber"></span>Radiology Audit</button>
+    <button class="nav-item" onclick="showTab('drugs',this)"><span class="nav-dot red"></span>Drug Safety Audit</button>
+    <button class="nav-item" onclick="showTab('transfusion',this)"><span class="nav-dot red"></span>Transfusion Audit</button>
+    <button class="nav-item" onclick="showTab('lama',this)"><span class="nav-dot amber"></span>LAMA & Emergency Docs</button>
+    <button class="nav-item" onclick="showTab('justification',this)"><span class="nav-dot amber"></span>Justification Letter</button>
+    <button class="nav-item" onclick="showTab('checklist',this)"><span class="nav-dot amber"></span>Compliance Checklist</button>
+    <button class="nav-item" onclick="showTab('lamaaudit',this)"><span class="nav-dot red"></span>LAMA Clinical Audit</button>
+    <button class="nav-item" onclick="showTab('resubmit',this)"><span class="nav-dot green"></span>Resubmission Plan</button>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Legend</div>
+    <div style="font-size:11px;color:var(--text3);padding:0 8px;line-height:2;">
+      <span style="color:var(--red);">■</span> Critical / Must Fix<br>
+      <span style="color:var(--amber);">■</span> Warning / Needs Justification<br>
+      <span style="color:var(--green);">■</span> Confirmed / Defensible
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- ===== OVERVIEW ===== -->
+<div id="tab-overview" class="tab-panel active">
+  <div class="section-header">Executive Summary</div>
+
+  <div class="card flag-red">
+    <div class="card-title">Why the claim was rejected — primary causes <span class="badge badge-red">Confirmed</span></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>#</th><th>Rejection Reason</th><th>Category</th><th>Impact</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">01</td><td>Piped O₂ per hour (₹58/hr × 24h × 28 days ≈ ₹38,000) billed on top of ICU package — direct unbundling of a service included in CP018C</td><td class="crit">Financial fraud</td><td class="crit">Very High</td></tr>
+          <tr><td class="mono">02</td><td>Daily consultation rounds billed as separate specialist consultation charges (₹350/visit × 2 visits/day × 28 days ≈ ₹19,600) on top of ICU package that already includes clinical oversight</td><td class="crit">Unbundling</td><td class="crit">Very High</td></tr>
+          <tr><td class="mono">03</td><td>Transfusion monitoring charts show physically impossible vitals (BP 28/67 mmHg, HR 20 bpm, RR 81/min) across all 4 episodes — appears fabricated to a non-clinical reviewer</td><td class="crit">Data integrity</td><td class="crit">Very High</td></tr>
+          <tr><td class="mono">04</td><td>ECG printout (10 Apr) carries a different patient's demographics: "Shela desi, 55y, Female, ID 13965" — identity mismatch on the primary cardiac document</td><td class="crit">Identity integrity</td><td class="crit">High</td></tr>
+          <tr><td class="mono">05</td><td>Blood group conflict: O Rh+ve on all transfusion monitoring forms vs A Positive in 03 May clinical progress note — cannot be both; raises ABO mismatch concern</td><td class="crit">Patient safety flag</td><td class="crit">High</td></tr>
+          <tr><td class="mono">06</td><td>LAMA: patient discharged with K⁺ 1.7 mmol/L (life-threatening), Hb 7.9 g/dL, RBS 352 mg/dL — critical parameters uncorrected at time of departure despite 28 days of ICU care</td><td class="warn">Clinical adequacy</td><td class="crit">High</td></tr>
+          <tr><td class="mono">07</td><td>Bill submitted at hospital MRP rates, not CGHS/CAPF panel tariff codes — no CP018C/MD003A code format used anywhere in the 38-page itemised bill</td><td class="crit">Wrong billing format</td><td class="crit">High</td></tr>
+          <tr><td class="mono">08</td><td>29 chest X-rays billed, all 29 reports word-for-word identical — no clinical change documented across the entire admission; daily CXR orders not found in progress notes</td><td class="warn">Over-utilisation</td><td class="warn">Medium-High</td></tr>
+          <tr><td class="mono">09</td><td>Non-emergency chronic panels billed on Day 1: Lipid profile ₹2,070, Thyroid profile ₹230, Vit D3 ₹633, Vit B12 ₹288, Complement C3 ₹650 — none clinically indicated in acute emergency</td><td class="warn">Unjustified tests</td><td class="warn">Medium-High</td></tr>
+          <tr><td class="mono">10</td><td>Quantiferon TB Gold (₹4,000) billed twice — 17 Apr and 01 May. One-time diagnostic test cannot be repeated without clinical justification</td><td class="warn">Duplicate billing</td><td class="warn">Medium</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section-header">Financial Summary</div>
+  <div class="grid4">
+    <div class="metric-card"><div class="metric-label">Total Claimed</div><div class="metric-val red">₹13.67L</div><div class="metric-sub">Bill No 455/25-26</div></div>
+    <div class="metric-card"><div class="metric-label">Approved Package</div><div class="metric-val amber">₹4.16L</div><div class="metric-sub">CAPF CSPW approved</div></div>
+    <div class="metric-card"><div class="metric-label">Confirmed Disallowable</div><div class="metric-val red">~₹1.4L</div><div class="metric-sub">Verified line items</div></div>
+    <div class="metric-card"><div class="metric-label">Defensible Range</div><div class="metric-val green">₹5.5–7.5L</div><div class="metric-sub">After all corrections</div></div>
+  </div>
+
+  <div class="section-header">Confirmed Disallowable Breakdown</div>
+  <div class="card">
+    <div class="progress-wrap"><div class="progress-label"><span>Piped O₂ (unbundled)</span><span class="crit">~₹38,000</span></div><div class="progress-bar"><div class="progress-fill fill-red" style="width:100%"></div></div></div>
+    <div class="progress-wrap"><div class="progress-label"><span>Daily consultation rounds (unbundled)</span><span class="crit">~₹21,350</span></div><div class="progress-bar"><div class="progress-fill fill-red" style="width:56%"></div></div></div>
+    <div class="progress-wrap"><div class="progress-label"><span>Infusion pump charges (bundled in ICU)</span><span class="warn">~₹27,000</span></div><div class="progress-bar"><div class="progress-fill fill-amber" style="width:71%"></div></div></div>
+    <div class="progress-wrap"><div class="progress-label"><span>Excess chest X-rays (24 of 29)</span><span class="warn">₹5,520</span></div><div class="progress-bar"><div class="progress-fill fill-amber" style="width:15%"></div></div></div>
+    <div class="progress-wrap"><div class="progress-label"><span>Excess echocardiograms (5 of 8)</span><span class="warn">₹7,375</span></div><div class="progress-bar"><div class="progress-fill fill-amber" style="width:19%"></div></div></div>
+    <div class="progress-wrap"><div class="progress-label"><span>Duplicate Quantiferon TB Gold</span><span class="crit">₹4,000</span></div><div class="progress-bar"><div class="progress-fill fill-red" style="width:11%"></div></div></div>
+    <div class="progress-wrap"><div class="progress-label"><span>Non-emergency chronic panels (Lipids, TFT, Vit D/B12, C3)</span><span class="warn">₹3,871</span></div><div class="progress-bar"><div class="progress-fill fill-amber" style="width:10%"></div></div></div>
+    <div class="progress-wrap"><div class="progress-label"><span>Glenferr FCM non-standard dosing (5 daily doses)</span><span class="crit">~₹16,000</span></div><div class="progress-bar"><div class="progress-fill fill-red" style="width:42%"></div></div></div>
+    <div class="progress-wrap"><div class="progress-label"><span>OTC supplements (Centrum, D3, VSL#3)</span><span class="warn">~₹4,000</span></div><div class="progress-bar"><div class="progress-fill fill-amber" style="width:11%"></div></div></div>
+  </div>
+</div>
+
+<!-- ===== PATIENT & IDENTITY ===== -->
+<div id="tab-patient" class="tab-panel">
+  <div class="section-header">Patient Identity & Administrative Verification</div>
+  <div class="grid2">
+    <div class="card flag-green">
+      <div class="card-title">Identity confirmed across all documents <span class="badge badge-green">Verified</span></div>
+      <ul class="audit-list">
+        <li><strong>Name:</strong> Mr. Sh Daya Pandey, 62Y/M</li>
+        <li><strong>DOB:</strong> 01 January 1963</li>
+        <li><strong>UHID:</strong> 32897 · IPD-164/25-26</li>
+        <li><strong>CAPF ID:</strong> P3C3TMCVD</li>
+        <li><strong>ABHA ID:</strong> 91-3653-8786-5352</li>
+        <li><strong>PM-JAY ID:</strong> P3C3TMCVD</li>
+        <li><strong>ITBP Reg:</strong> ITBP/ITIT070312962 · MHA</li>
+        <li><strong>Address:</strong> 11 BN NDRF Chaukaghat, Varanasi, UP</li>
+        <li><strong>Attendant:</strong> Ajay Kumar Pandey (Son)</li>
+        <li><strong>Contact:</strong> 9797743462</li>
+      </ul>
+    </div>
+    <div class="card flag-green">
+      <div class="card-title">Geotagged verification <span class="badge badge-green">Confirmed</span></div>
+      <ul class="audit-list">
+        <li>Lat 25.3526°N, Long 82.9790°E matches hospital address</li>
+        <li>Timestamps: 10 Apr (7:42 PM), 22 Apr, 06 May 2025</li>
+        <li>Maps to Panchkoshi Rd, Orderly Bazar, Varanasi 221002</li>
+        <li>Matches Infinity Care Hospital letterhead address</li>
+        <li>CAPF card father-son relationship confirmed: Daya Pandey = Father of Ajay Kumar Pandey</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-header">Hospital & Consultant Verification</div>
+  <div class="card flag-green">
+    <div class="card-title">All consultant registrations verified <span class="badge badge-green">Fully compliant</span></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Consultant</th><th>Qualification</th><th>Registration</th><th>Role</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Dr. Abhishek Vikram Singh</td><td>MD, DM (Interventional Cardiologist)</td><td class="mono">UPC Reg. No. 56142</td><td>Primary consultant</td><td class="ok">Verified on all main chart pages</td></tr>
+          <tr><td>Dr. Pritesh Singh</td><td>MBBS, MD, PDCC Critical Care</td><td class="mono">UPMC-73757</td><td>ICU/Critical Care</td><td class="ok">Verified on all ICU progress notes</td></tr>
+          <tr><td>Dr. Sachin Singh</td><td>MBBS, MD Anaesthesiology, PDCC CCM</td><td class="mono">UPMC-107017</td><td>Consultant Intensivist</td><td class="ok">On justification letter 16 Jun 2025</td></tr>
+          <tr><td>Dr. Arun K G</td><td>MBBS, MD, DNB Nephrology</td><td class="mono">Reg. No. 46458</td><td>Nephrology</td><td class="ok">On justification letter; daily visits confirmed by creatinine 4.85 Day 2</td></tr>
+          <tr><td>Dr. Peeyoosh Rai</td><td>MBBS, DNB, DrNB (Gastroenterology)</td><td class="mono">Reg. No. 23930</td><td>Gastroenterology</td><td class="ok">On both endoscopy reports — 24 Apr + 29 Apr</td></tr>
+          <tr><td>Dr. Guddakesh Kumar</td><td>MD (Radiology)</td><td class="mono">AL-2467 (hospital)</td><td>Radiologist</td><td class="ok">On all NCCT, CXR, USG reports</td></tr>
+          <tr><td>Dr. Priyanka Rai</td><td>MBBS, MD (Pathology)</td><td class="mono">AL-2467 (hospital)</td><td>Approving Pathologist</td><td class="ok">On all 148 NABL lab reports</td></tr>
+          <tr><td>Hospital</td><td>Infinity Care Hospital, A Unit of Saraswati Trust</td><td class="mono">Reg. No. AL-2467</td><td>CAPF Panel facility</td><td class="ok">QCI, NABH, NABL-MELIT-02351/02379 accredited</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section-header">Critical Identity Errors — Must Correct</div>
+  <div class="card flag-red">
+    <div class="card-title">Emergency Certificate — S/o vs F/o error <span class="badge badge-red">Minor but flaggable</span></div>
+    <div class="card-sub">The Emergency Admission Certificate reads "S/o Ajay Kumar Pandey" (Son of Ajay Kumar). Daya Pandey is the father; Ajay Kumar is the son/attendant. Should read "F/o Ajay Kumar Pandey" or "Attendant: Ajay Kumar Pandey (Son)." Needs correction letter.</div>
+  </div>
+  <div class="card flag-red">
+    <div class="card-title">LAMA Summary — gender pronoun error <span class="badge badge-red">Documentation quality</span></div>
+    <div class="card-sub">Page 1 of LAMA Summary, in the History of Present Illness section: "So she was admitted in Infinity Care Hospital..." — the patient is male. Also, CVA duration written as "OLD CVA-2_days" which is illegible. Both require correction in an amended discharge summary.</div>
+  </div>
+</div>
+
+<!-- ===== CLINICAL AUDIT ===== -->
+<div id="tab-clinical" class="tab-panel">
+  <div class="section-header">ABG Trajectory — 20 Reports (17 Apr – 08 May 2025)</div>
+  <div class="card flag-red">
+    <div class="card-title">Refractory hypoxemia — never corrected across entire admission <span class="badge badge-red">ARDS confirmed</span></div>
+    <div class="alert alert-red">pO₂ tracked consistently between 36–45 mmHg for 3 weeks on NIV (FiO₂ 40–60%) and mechanical ventilation (FiO₂ 50%, PEEP 5). P/F ratio on 07 May = 39 ÷ 0.50 = <strong>78</strong> — severe ARDS threshold. PEEP was left at 5 cmH₂O throughout. Berlin ARDS criteria requires PEEP 12–18 for P/F &lt;150. No prone positioning ever documented.</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Date</th><th>pH</th><th>pO₂</th><th>K⁺</th><th>Na⁺</th><th>Glucose</th><th>Lactate</th><th>Support</th><th>Key Event</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">17 Apr</td><td>7.45</td><td class="warn">63</td><td class="crit">2.9</td><td class="warn">149</td><td>113</td><td>1.7</td><td>O₂/NIV</td><td>Respiratory alkalosis, electrolyte crisis</td></tr>
+          <tr><td class="mono">19 Apr 05:51</td><td>7.41</td><td class="crit">38</td><td class="crit">1.7</td><td class="warn">147</td><td>~1</td><td>1.6</td><td>NIV</td><td>Critical hypoxemia + critical K nadir</td></tr>
+          <tr><td class="mono">19 Apr 14:16</td><td>7.46</td><td class="crit">41</td><td class="crit">2.3</td><td class="crit">159</td><td>92</td><td>1.7</td><td>NIV</td><td>Severe hypernatremia 159</td></tr>
+          <tr><td class="mono">20 Apr</td><td>7.37</td><td class="crit">38</td><td class="crit">1.9</td><td class="ok">137</td><td>88</td><td>1.6</td><td>NIV</td><td>Refractory hypoxemia</td></tr>
+          <tr><td class="mono">24 Apr</td><td>7.40</td><td class="crit">38</td><td class="crit">2.3</td><td class="warn">149</td><td class="crit">233</td><td>1.3</td><td>NIV</td><td>New hyperglycemia — steroid/stress</td></tr>
+          <tr><td class="mono">26 Apr</td><td>7.48</td><td class="crit">37</td><td class="crit">1.6</td><td class="warn">146</td><td class="warn">174</td><td class="warn">2.6</td><td>NIV</td><td>K nadir 1.6, rising lactate</td></tr>
+          <tr><td class="mono">06 May 18:39</td><td class="crit">7.30</td><td class="crit">37</td><td>3.2</td><td class="ok">138</td><td class="warn">178</td><td>1.7</td><td>NIV FiO₂60% PEEP5</td><td>NIV failure — mixed acidosis, ventilatory fatigue</td></tr>
+          <tr><td class="mono">07 May 18:19</td><td>7.40</td><td class="crit">39</td><td class="crit">2.2</td><td class="crit">152</td><td class="crit">291</td><td>1.6</td><td>MV FiO₂50% PEEP5</td><td>Intubated — ARDS P/F=78, PEEP inadequate</td></tr>
+          <tr><td class="mono">08 May</td><td>7.42</td><td class="crit">38</td><td class="crit">1.7</td><td class="crit">154</td><td class="warn">191</td><td>1.5</td><td>MV</td><td>LAMA — K 1.7 critical at discharge</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section-header">Lab Trajectory — KFT, CBC, Biochemistry</div>
+  <div class="card flag-red">
+    <div class="card-title">Creatinine peaked at 4.85 mg/dL on Day 2 (11 April) — severe AKI <span class="badge badge-red">New finding — severity upgrade</span></div>
+    <div class="alert alert-red">KFT report 11/04/2025 (Req No 10427/IPD-164): Creatinine 4.85 mg/dL, Urea 121.38 mg/dL. eGFR ≈ 11–14 ml/min (Stage 3b–4 AKI). This was the true admission renal state — far worse than the 2.00 mg/dL seen on 18 Apr, which represented partial recovery. This finding independently justifies daily nephrology involvement from Day 1.</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Date</th><th>Hb (g/dL)</th><th>MCV</th><th>TLC (×10³)</th><th>Platelets</th><th>Creatinine</th><th>Albumin</th><th>Na⁺</th><th>K⁺</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">11/04</td><td class="warn">—</td><td>—</td><td>—</td><td>—</td><td class="crit">4.85 H</td><td class="crit">2.10 L</td><td>143.5</td><td>3.56 L</td></tr>
+          <tr><td class="mono">17/04</td><td class="warn">9.6 L</td><td class="warn">77.1 L</td><td>5.13</td><td>161</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td class="mono">18/04</td><td class="warn">10.6 L</td><td class="warn">77.5 L</td><td>5.51</td><td>200</td><td class="warn">2.00 H</td><td class="crit">1.93 L</td><td class="crit">152.8 H</td><td class="crit">3.07 L</td></tr>
+          <tr><td class="mono">19/04</td><td class="warn">9.8 L</td><td class="warn">78.8 L</td><td>5.38</td><td>263</td><td class="warn">2.25 H</td><td class="crit">1.80 L</td><td class="crit">154.4 H</td><td class="crit">3.23 L</td></tr>
+          <tr><td class="mono">05/05</td><td class="warn">10.2 L</td><td class="ok">90.8</td><td class="crit">15.25 H</td><td class="warn">130 L</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td class="mono">06/05</td><td class="warn">10.2 L</td><td class="ok">90.0</td><td class="crit">13.29 H</td><td class="warn">133 L</td><td class="ok">1.10</td><td class="warn">2.22 L</td><td class="warn">147.6 H</td><td class="ok">4.14</td></tr>
+          <tr><td class="mono">07/05</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="warn">1.38 H↑</td><td class="warn">2.63 L</td><td class="warn">149.3 H</td><td class="crit">3.05 L</td></tr>
+          <tr><td class="mono">08/05</td><td class="crit">7.9 L</td><td>87.7</td><td class="crit">12.42 H</td><td class="warn">129 L</td><td>1.23</td><td class="crit">2.08 L</td><td class="crit">152.4 H</td><td class="warn">3.32 L</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card flag-red">
+      <div class="card-title">Serum Mg 2.85 (HIGH) — MgSO₄ still given <span class="badge badge-red">Prescribing safety</span></div>
+      <div class="card-sub">20 April lab: Serum Magnesium 2.85 mg/dL (ref 1.7–2.4). Drug chart shows MgSO₄ 2g IV q12h continued. Hypermagnesaemia + severe CKD = risk of respiratory paralysis and cardiac arrest. Requires retrospective clinical note explaining decision.</div>
+    </div>
+    <div class="card flag-red">
+      <div class="card-title">Platelets 20,000 — DAPT continued <span class="badge badge-red">Life-threatening</span></div>
+      <div class="card-sub">Drug chart confirms Aspirin 150mg + Clopidogrel 75mg (DAPT) continued when platelets documented at 20,000/µL alongside active GI bleed (confirmed on endoscopy). Simultaneous Linezolid &gt;14 days likely causative of thrombocytopenia. Risk-benefit note mandatory.</div>
+    </div>
+  </div>
+
+  <div class="section-header">Protocol Violations Confirmed</div>
+  <div class="card flag-red">
+    <div class="card-title">4 major ICU protocol violations documented</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Protocol</th><th>Standard Required</th><th>What Occurred</th><th>Consequence</th></tr></thead>
+        <tbody>
+          <tr><td>ARDS Ventilation (Berlin/ARDSNet)</td><td>PEEP 12–18 cmH₂O if P/F &lt;150; prone positioning if P/F &lt;150 &gt;12h</td><td class="crit">PEEP 5 throughout even after intubation (P/F=78). No prone positioning documented.</td><td>Ongoing micro-atelectasis, refractory shunt, failed alveolar recruitment</td></tr>
+          <tr><td>Hypokalemia management (AACN)</td><td>K⁺ &lt;2.5 = emergency; central KCl 20 mEq/hr; recheck q2–4h until K &gt;3.5</td><td class="crit">K⁺ never reached 3.5 across 20 ABGs over 28 days. Nadirs: 1.6 (26 Apr) and 1.7 (08 May at LAMA)</td><td>Life-threatening arrhythmia risk throughout entire admission and at discharge</td></tr>
+          <tr><td>Glycemic control (ICU insulin protocol)</td><td>IV insulin infusion if glucose &gt;180; target 140–180; avoid &lt;70</td><td class="crit">Glucose 53 mg/dL (05 May) → 235 mg/dL (06 May 02:21) → 291 mg/dL (07 May). No standardised protocol.</td><td>Hypoglycaemia (neurological risk) and hyperglycaemia (metabolic acidosis trigger)</td></tr>
+          <tr><td>Hypernatraemia correction</td><td>Hypotonic fluids; reduce Na by ≤10–12 mEq/L per 24h to prevent cerebral oedema</td><td class="crit">Na spiked to 159, normalised to 136, rebounded to 154. Erratic — no free-water calculation documented.</td><td>Risk of cerebral oedema (rapid correction) or metabolic encephalopathy (persistent hypernatraemia)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BILL AUDIT ===== -->
+<div id="tab-bill" class="tab-panel">
+  <div class="section-header">Bill Structure — 38 Pages · 504 Line Items</div>
+  <div class="alert alert-red"><strong>Root cause of rejection:</strong> The bill is submitted as a raw hospital MRP itemised list — not in CGHS/CAPF package format. No CP018C, MD003A, or other approved tariff codes appear anywhere. The entire claim needs to be restructured in CGHS format before resubmission.</div>
+
+  <div class="grid4" style="margin:16px 0;">
+    <div class="metric-card"><div class="metric-label">Consultation</div><div class="metric-val red" style="font-size:18px;">₹25,550</div><div class="metric-sub">46 items · 28 days</div></div>
+    <div class="metric-card"><div class="metric-label">Laboratory</div><div class="metric-val amber" style="font-size:18px;">₹76,616</div><div class="metric-sub">168 items</div></div>
+    <div class="metric-card"><div class="metric-label">Radiology</div><div class="metric-val amber" style="font-size:18px;">₹25,165</div><div class="metric-sub">47 items</div></div>
+    <div class="metric-card"><div class="metric-label">Room (ICU)</div><div class="metric-val red" style="font-size:18px;">₹1,51,200</div><div class="metric-sub">₹5,400/day × 28</div></div>
+    <div class="metric-card"><div class="metric-label">Additional Services</div><div class="metric-val red" style="font-size:18px;">₹1,05,892</div><div class="metric-sub">O₂, pumps, BiPAP</div></div>
+    <div class="metric-card"><div class="metric-label">Medicine (net)</div><div class="metric-val red" style="font-size:18px;">₹9,51,810</div><div class="metric-sub">After ₹3,234 returns</div></div>
+    <div class="metric-card"><div class="metric-label">Procedures</div><div class="metric-val green" style="font-size:18px;">₹7,788</div><div class="metric-sub">Physio + procedures</div></div>
+    <div class="metric-card"><div class="metric-label">TOTAL</div><div class="metric-val red" style="font-size:18px;">₹13,67,708</div><div class="metric-sub">As claimed</div></div>
+  </div>
+
+  <div class="section-header">Consultation — Unbundling Confirmed</div>
+  <div class="card flag-red">
+    <div class="card-title">Daily rounds billed as separate consultations <span class="badge badge-red">Primary rejection cause</span></div>
+    <div class="card-sub">Dr. Abhishek Vikram Singh billed at ₹350 × 2 units on most days (morning + evening rounds separately). Dr. Arun K G (Nephrology) billed daily for 18 days. Under CGHS/CAPF, CP018C (ICU per day) includes clinical oversight — rounds are not separately payable. Only formal cross-referral consultations are billable. Maximum defensible: ~₹3,500–4,200 (one formal referral per specialist × 5 specialists).</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Consultant</th><th>Days Billed</th><th>Amount</th><th>Defensible</th><th>Disallowable</th></tr></thead>
+        <tbody>
+          <tr><td>Dr. Abhishek V Singh (Cardiology)</td><td>All 28 days × 2 units most days</td><td class="warn">~₹16,800</td><td class="ok">First formal referral ₹350</td><td class="crit">~₹16,450</td></tr>
+          <tr><td>Dr. Arun K G (Nephrology)</td><td>~18 days daily</td><td class="warn">~₹6,300</td><td class="ok">1–2 formal consultations ₹700</td><td class="crit">~₹5,600</td></tr>
+          <tr><td>Dr. Peeyoosh Rai (Gastro)</td><td>13 Apr + 25 Apr (2 visits)</td><td class="ok">₹700</td><td class="ok">Both justified (GI bleed)</td><td>₹0</td></tr>
+          <tr><td>Dr. Javed R Ansari (Gen Surgery)</td><td>26 Apr (1 visit)</td><td class="ok">₹350</td><td class="ok">Justified (hemorrhoids)</td><td>₹0</td></tr>
+          <tr><td>Dr. Abhishek Mishra (Ortho)</td><td>18 Apr (1 visit)</td><td class="warn">₹350</td><td class="warn">No documented ortho complaint — needs justification</td><td class="warn">₹350 at risk</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section-header">Additional Services — Unbundling Confirmed</div>
+  <div class="card flag-red">
+    <div class="card-title">Piped O₂ per hour — billed every day, entire admission <span class="badge badge-red">Textbook unbundling</span></div>
+    <div class="card-sub">Compressed air/piped oxygen (Code 512) billed at ₹58/hour × 24 hours = ₹1,392/day, almost every single day from 11 Apr to 08 May. Total: approximately ₹35,000–₹38,000. Under CGHS CAPF bundling rules, piped oxygen is explicitly included within CP018C (ICU per day). This is the single largest improper line item per billing unit in the entire claim.</div>
+  </div>
+
+  <div class="section-header">Laboratory — Key Findings</div>
+  <div class="card flag-red">
+    <div class="card-title">Day 1 — 23 investigations including non-emergency chronic panels <span class="badge badge-red">Overkill on admission</span></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Test</th><th>Amount</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td>Lipid Profile (IB059A)</td><td class="mono">₹2,070</td><td class="crit">Not indicated in acute emergency — chronic monitoring panel</td></tr>
+          <tr><td>Thyroid Profile T3/T4/TSH (IE001A)</td><td class="mono">₹230</td><td class="crit">No thyroid indication documented; chronic screening only</td></tr>
+          <tr><td>Vitamin D3 (OA004A)</td><td class="mono">₹633</td><td class="crit">Not indicated in acute emergency; chronic supplementation monitoring</td></tr>
+          <tr><td>Vitamin B12 (IC004A)</td><td class="mono">₹288</td><td class="crit">Chronic screening; not acute-care indicated</td></tr>
+          <tr><td>Complement C3 (IB804A)</td><td class="mono">₹650</td><td class="crit">No immunological indication; autoimmune screening not warranted in acute sepsis</td></tr>
+          <tr><td>Troponin I (IB115A) + Troponin T (IB116A)</td><td class="mono">₹232</td><td class="warn">Duplicate — only one assay is the global standard; one disallowable</td></tr>
+          <tr><td>Quantiferon TB Gold — billed TWICE (17 Apr + 01 May)</td><td class="mono">₹8,000</td><td class="crit">One-time test billed twice. Second test = ₹4,000 disallowable</td></tr>
+          <tr><td>Mantoux + Quantiferon same day (01 May)</td><td class="mono">₹200</td><td class="warn">Alternative tests for same clinical question — one disallowable</td></tr>
+          <tr><td>Procalcitonin × 5 (10, 17, 21, 25, 28 Apr)</td><td class="mono">₹10,350</td><td class="warn">No documented PCT-guided de-escalation protocol. 3 excess PCTs ≈ ₹6,210 disallowable</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section-header">High-Cost Medicines — Defensible vs Challenged</div>
+  <div class="card">
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Medicine</th><th>Cost</th><th>Clinical support</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>IV Albumin (Hbomin 20%) × 4 vials</td><td class="mono">~₹35,996</td><td>Albumin 1.80–2.10 confirmed on multiple lab reports</td><td class="ok">Fully defensible — attach lab reports</td></tr>
+          <tr><td>Zavicefta (Ceftazidime/Avibactam) 2.5g</td><td class="mono">High</td><td>MDR/XDR sepsis suspected; TLC 15.25 leukocytosis confirmed</td><td class="warn">Defensible with culture sensitivity report</td></tr>
+          <tr><td>Caspofungin 50mg × 8–10 vials</td><td class="mono">~₹1.5–1.9L</td><td>Aspergillus IgG ordered 01 May; clinical note from 02 May confirms prescription</td><td class="warn">Earlier billing (before 02 May note) needs start-date clarification</td></tr>
+          <tr><td>Colistin 3 MIU (Resilistin)</td><td class="mono">High</td><td>Clinical note: "started 06 May D1." Bill shows dispensing from late April.</td><td class="warn">Timeline conflict — clarify with pharmacy dispensing records</td></tr>
+          <tr><td>Erythropoietin 4000 IU</td><td class="mono">~₹1,162/vial</td><td>Hb 7.9–9.6; CKD; noted in clinical notes 05 May onward</td><td class="ok">Defensible</td></tr>
+          <tr><td>Glenferr FCM 500mg × 5 daily doses</td><td class="mono">~₹19,995</td><td>IDA confirmed (MCV 77); but FCM protocol = 1–2 doses total</td><td class="crit">Non-standard daily dosing — ₹12–16k excess billing</td></tr>
+          <tr><td>MgSO₄ 2g IV (continuing after Mg 2.85 HIGH)</td><td class="mono">Low unit cost</td><td>Mg was HIGH on 20 Apr yet continued</td><td class="crit">Prescribing safety flag — consultant note required</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== RADIOLOGY ===== -->
+<div id="tab-radiology" class="tab-panel">
+  <div class="section-header">Radiology Audit — All Reports Verified from Actual PDFs</div>
+
+  <div class="card flag-red">
+    <div class="card-title">29 chest X-rays — ALL identical, every single day <span class="badge badge-red">Over-utilisation confirmed from actual reports</span></div>
+    <div class="alert alert-red">XRAY.pdf verified: 30 pages, individual reports dated 10 Apr to 08 May 2025. Every report contains word-for-word identical findings. Not one report shows any change. No consolidation, no new effusion, no infiltrate ever documented. The USG on 22 Apr confirmed left pleural effusion — yet none of the 29 CXR reports ever document it (always "?Positional"). This proves the daily CXRs were not contributing to clinical decisions.</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Finding</th><th>Day 1 (10 Apr)</th><th>Day 29 (08 May)</th><th>Any change?</th></tr></thead>
+        <tbody>
+          <tr><td>Film rotation</td><td>Left</td><td>Right (from 21 Apr)</td><td class="warn">Direction changed — positioning error, not a clinical finding</td></tr>
+          <tr><td>Bronchovascular markings</td><td>Prominent bilateral</td><td>Prominent bilateral</td><td class="crit">No change — identical wording all 29</td></tr>
+          <tr><td>Left CP angle</td><td>Obliterated ?Positional</td><td>Obliterated ?Positional</td><td class="crit">Never resolved — pleural effusion confirmed by USG but never by CXR</td></tr>
+          <tr><td>Lung parenchyma</td><td>Normal</td><td>Normal</td><td class="crit">No change — no consolidation, ARDS changes, or pneumothorax ever documented</td></tr>
+          <tr><td>Mediastinum/hila</td><td>Normal</td><td>Normal</td><td class="crit">No change</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="verdict">
+      <div class="verdict-title">Defensible CXR count</div>
+      <p style="font-size:12px;color:var(--text2);">Admission (10 Apr) + HRCT justification (18 Apr) + post-intubation (07 May) + LAMA day (08 May) + 1–2 during sepsis escalation (05–06 May) = <span class="ok">5–6 maximum defensible</span>. Disallowable: 23–24 × ₹230 = <span class="crit">₹5,290–₹5,520</span></p>
+    </div>
+  </div>
+
+  <div class="card flag-red">
+    <div class="card-title">2D Echo × 8 — all show identical LVEF 40–45%, same RWMA <span class="badge badge-red">Excess repetition confirmed</span></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Date</th><th>LVEF</th><th>New vs prior</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">11 Apr</td><td>40–45%</td><td>Baseline — first echo</td><td class="ok">Justified</td></tr>
+          <tr><td class="mono">12 Apr</td><td>40–45%</td><td>Grade I TR added (minor)</td><td class="warn">Borderline — argue with clinical note</td></tr>
+          <tr><td class="mono">14 Apr</td><td>40–45%</td><td>Minimal pericardial pathology (new)</td><td class="warn">Defensible — new finding</td></tr>
+          <tr><td class="mono">15 Apr</td><td>40–45%</td><td>Identical to 14 Apr</td><td class="crit">Not justified — same day after 14 Apr</td></tr>
+          <tr><td class="mono">23 Apr</td><td>40–45%</td><td>Identical to 14/15 Apr</td><td class="crit">No clinical change documented</td></tr>
+          <tr><td class="mono">28 Apr</td><td>40–45%</td><td>Degenerative aortic valve changes (new)</td><td class="warn">Defensible — new finding; attach management note</td></tr>
+          <tr><td class="mono">30 Apr</td><td>40–45%</td><td>Identical to 28 Apr</td><td class="crit">Not justified day after 28 Apr</td></tr>
+          <tr><td class="mono">02 May</td><td>40–45%</td><td>Identical to 28/30 Apr</td><td class="crit">Not justified</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="verdict">
+      <div class="verdict-title">Defensible echo count</div>
+      <p style="font-size:12px;color:var(--text2);">11 Apr + 14 Apr + 28 Apr = <span class="ok">3 defensible echos × ₹1,475 = ₹4,425</span>. Disallowable: 5 × ₹1,475 = <span class="crit">₹7,375</span></p>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card flag-green">
+      <div class="card-title">Justified imaging <span class="badge badge-green">Payable</span></div>
+      <ul class="audit-list">
+        <li>NCCT Head (10 Apr, ₹1,035) — altered GCS + known CVA — single scan, clean</li>
+        <li>HRCT Chest (18 Apr, ₹2,000) — refractory hypoxemia workup — single scan</li>
+        <li>USG Whole Abdomen (22 Apr, ₹800) — confirmed pleural effusion + renal disease</li>
+        <li>UGIE + Sigmoidoscopy (24 Apr + 29 Apr, ₹3,572) — both confirmed active GI bleed</li>
+        <li>Holter 48h (16–18 Apr, ₹2,500) — defensible with IHD + arrhythmia risk note</li>
+      </ul>
+    </div>
+    <div class="card flag-red">
+      <div class="card-title">ECG identity mismatch — CONFIRMED <span class="badge badge-red">Critical</span></div>
+      <div class="card-sub">Page 1 of RADIO.pdf: machine-printed header reads "Shela desi, 55y, Female, ID: 13965." Hospital stamp below correctly reads Mr. Sh Daya Pandey, 62y, Male, UHID 32897. Machine carry-over error from previous patient. Second ECG (11 Apr) is correctly attributed. Fix: signed letter from Dr. Abhishek explaining the carry-over error + 11 Apr ECG as primary cardiac record.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DRUGS ===== -->
+<div id="tab-drugs" class="tab-panel">
+  <div class="section-header">Drug Safety Audit — Confirmed Against Actual Lab Values</div>
+  <div class="card flag-red">
+    <div class="card-title">5 drug safety concerns confirmed against lab reports <span class="badge badge-red">Regulatory and patient safety risk</span></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Drug</th><th>Prescribed</th><th>Lab conflict</th><th>Safety verdict</th><th>Action needed</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Meropenem 1g IV q8h</strong></td>
+            <td>From 17 Apr; dose unwritten. 02 May note: 1g q8h</td>
+            <td class="crit">Cr 4.85 (11 Apr) eGFR ~12 ml/min</td>
+            <td class="crit">Standard dose = 3g/day. Correct dose at eGFR 12 = 500mg q24h = 0.5g/day. Six-fold overdose risk. Seizures.</td>
+            <td>Retrospective note from Dr. Abhishek confirming renal-adjusted dose was used in practice</td>
+          </tr>
+          <tr>
+            <td><strong>Febuxostat 40mg OD (Feburik)</strong></td>
+            <td>Started 12 Apr</td>
+            <td class="crit">Cr 4.85 (11 Apr), 3.19 (12 Apr) eGFR &lt;15</td>
+            <td class="crit">Absolute contraindication in severe AKI/CKD eGFR &lt;15. Should not have been prescribed. No documented uric acid indication.</td>
+            <td>Clinical note acknowledging prescribing error and confirming drug was discontinued early; or if not discontinued, justify rationale</td>
+          </tr>
+          <tr>
+            <td><strong>MgSO₄ 2g IV q12h</strong></td>
+            <td>02 May note + Apr drug chart</td>
+            <td class="crit">Serum Mg 2.85 HIGH on 20 Apr</td>
+            <td class="crit">Magnesium given to hypermagnesaemic patient with severe CKD. Risk of fatal toxicity (respiratory paralysis, cardiac arrest).</td>
+            <td>Dr. Arun Kumar (Nephrology) note explaining rationale: was Mg truly needed? Was the result known to the team?</td>
+          </tr>
+          <tr>
+            <td><strong>Aspirin 150mg + Clopidogrel 75mg (DAPT)</strong></td>
+            <td>From 13 Apr onward</td>
+            <td class="crit">Platelets 20,000/µL; active GI bleed confirmed on UGIE 24 Apr</td>
+            <td class="crit">Life-threatening haemorrhage risk. DAPT with platelets 20k + active GI bleed = extremely high spontaneous bleeding risk.</td>
+            <td>Risk-benefit note from Dr. Abhishek explaining why DAPT was maintained (e.g., recent coronary stent requires dual antiplatelet). If no stent — prescribing error.</td>
+          </tr>
+          <tr>
+            <td><strong>Linezolid 600mg BD &gt;14 days</strong></td>
+            <td>From 10 Apr — &gt;14 days continuous</td>
+            <td class="crit">Platelets fell from 263k to 20k then 129–133k</td>
+            <td class="warn">Linezolid-induced thrombocytopenia is well-documented with prolonged use. Continued despite platelet nadir 20,000. Risk-benefit assessment required.</td>
+            <td>Clinical note explaining why Linezolid was continued and what monitoring was in place</td>
+          </tr>
+          <tr>
+            <td><strong>Colistin 3 MIU IV BD</strong></td>
+            <td>Clinical note: started 06 May. Bill: dispensed from late Apr</td>
+            <td class="warn">Cr rose from 1.09 (06 May) to 1.38 (07 May)</td>
+            <td class="warn">Nephrotoxic; creatinine rise consistent with Colistin nephrotoxicity. Bill-note timeline conflict needs resolution.</td>
+            <td>Dr. Arun Kumar: renal dose adjustment plan for Colistin; explain bill vs note start-date discrepancy</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TRANSFUSION ===== -->
+<div id="tab-transfusion" class="tab-panel">
+  <div class="section-header">PRBC Transfusion Audit — 4 Episodes</div>
+
+  <div class="card flag-red">
+    <div class="card-title">Blood group conflict — most dangerous documentation error in file <span class="badge badge-red">Urgent — ABO safety flag</span></div>
+    <div class="alert alert-red"><strong>O Rh+ve</strong> on transfusion monitoring forms (Episodes 1, 2, 4) vs <strong>A Positive</strong> in 03 May clinical progress note (Episode 3, Bag No. 001945). A patient cannot be both O+ and A+. This creates an ABO mismatch concern that a medical director will not dismiss. Resolution: blood bank cross-match report for each of the 4 transfusions confirming the patient's true blood group.</div>
+  </div>
+
+  <div class="card flag-red">
+    <div class="card-title">Systematic vital sign inversion — confirmed pattern across all 4 episodes</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Episode</th><th>Date</th><th>Documented BP</th><th>True BP (corrected)</th><th>Documented HR</th><th>True HR</th><th>Documented RR</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td class="mono">12 Apr 14:30</td><td class="crit">28/67 (impossible)</td><td class="ok">67/28 (column swap)</td><td>63</td><td>63</td><td>23</td></tr>
+          <tr><td>2</td><td class="mono">16 Apr 12:15</td><td class="ok">185/66 (hypertensive spike — plausible)</td><td>—</td><td class="crit">20 (impossible bradycardia)</td><td class="ok">20 = RR (column swap)</td><td>81 (true HR)</td></tr>
+          <tr><td>2</td><td class="mono">16 Apr 12:30</td><td class="crit">19.8/68 (impossible)</td><td class="ok">119/68 (digit drop + swap)</td><td class="crit">85</td><td>85</td><td>21</td></tr>
+          <tr><td>3</td><td class="mono">26 Apr 09:45</td><td>199/72 (hypertensive)</td><td>—</td><td class="crit">28 (impossible)</td><td class="ok">28 = RR (column swap)</td><td>79 (true HR)</td></tr>
+          <tr><td>4</td><td class="mono">01 May 13:30</td><td>146/74 (plausible)</td><td>—</td><td class="crit">22 (impossible)</td><td class="ok">22 = RR</td><td>16–20 (true HR ≈ 22)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card-sub" style="margin-top:8px;">The pattern is consistent: pulse and respiratory rate columns are systematically swapped. The 03 May clinical note records pre-transfusion BP 140/70, HR 95, SpO2 98% — all clinically normal — confirming the patient was stable and the monitoring form errors are clerical column swaps, not real clinical emergencies. A signed nursing explanation letter is required for each episode.</div>
+  </div>
+
+  <div class="card flag-red">
+    <div class="card-title">Mandatory transfusion safety fields — blank across all 4 episodes <span class="badge badge-red">NABH compliance failure</span></div>
+    <div class="grid2">
+      <ul class="audit-list">
+        <li>Pre-transfusion check-box "Case No" — blank all 4</li>
+        <li>"Patient Blood Type" field — blank all 4</li>
+        <li>"Reason for Transfusion" — blank all 4</li>
+        <li>"Clinician" field — blank all 4</li>
+      </ul>
+      <ul class="audit-list">
+        <li>"Correct Patient initialled by 2" — not signed all 4</li>
+        <li>"Correct Unit initialled by 2" — not signed all 4</li>
+        <li>"Cross-matched? Compatible/Incompatible" — blank all 4</li>
+        <li>"Post-transfusion PCV &amp; time" — blank all 4</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card flag-amber">
+    <div class="card-title">Date/year transcription errors on forms <span class="badge badge-amber">Clerical</span></div>
+    <ul class="audit-list">
+      <li>Episode 2: date written as "16/4/28" (year 2028 instead of 2025)</li>
+      <li>Episode 2: product collection date "20/3/29" (year 2029 instead of 2025) — blood bank label correctly shows 20/3/25, expiry 01/05/25</li>
+      <li>Episode 3: date written as "26/9/25" (month 9 instead of month 4)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== LAMA ===== -->
+<div id="tab-lama" class="tab-panel">
+  <div class="section-header">LAMA Summary — 3 Pages Verified</div>
+  <div class="card flag-green">
+    <div class="card-title">LAMA discharge summary — clinically strong <span class="badge badge-green">Confirmed valid</span></div>
+    <ul class="audit-list">
+      <li>Correctly titled "LAMA Summary" — UHID 32897, IPD-164/25-26, DOA 10-04-2025 15:50, DOD 08-05-2025 16:30</li>
+      <li>ICD codes correctly assigned: R65.21, K64, K92.2, A15.0, E11, I10</li>
+      <li>Course narrative clinically coherent and consistent with all other documents</li>
+      <li>Discharge medications list (22 items) matches clinical notes and bill</li>
+      <li>Signed by Dr. Abhishek Vikram Singh (UPC 56142), Checked by DR. SHREE, Prepared by Mr. Mo Saif</li>
+      <li>Hospital stamp AL-2467 present on page 3</li>
+      <li>LAMA reason documented: "patient attenders are not willing for further stay opted for discharge against medical advise"</li>
+    </ul>
+  </div>
+
+  <div class="card flag-red">
+    <div class="card-title">LAMA consent form — ABSENT from file <span class="badge badge-red">Hard stop for resubmission</span></div>
+    <div class="alert alert-red">The discharge summary confirms LAMA occurred and states counselling was given. However, the <strong>attendant's signed LAMA consent form</strong> — where Ajay Kumar Pandey acknowledges risks explained and signs voluntarily leaving — is not in the uploaded documents. Under CGHS/CAPF CSPW guidelines, this signed form is mandatory for reimbursement eligibility in LAMA cases. Without it, the medical director cannot certify the departure was voluntary and informed.</div>
+    <div class="card-sub" style="margin-top:8px;">If the original signed form cannot be found, obtain a notarized declaration from Ajay Kumar Pandey (son, contact 9797743462) confirming he signed the LAMA form and was counselled on the risks by the medical team.</div>
+  </div>
+
+  <div class="card flag-amber">
+    <div class="card-title">Two errors in LAMA Summary text — must correct <span class="badge badge-amber">Documentation quality</span></div>
+    <ul class="audit-list">
+      <li><strong>Gender error:</strong> History section reads "So she was admitted in Infinity Care Hospital..." — patient is male. Needs amendment.</li>
+      <li><strong>CVA duration:</strong> Written as "OLD CVA-2_days" — illegible. Should read "Old CVA" (with approximate year of event if known).</li>
+    </ul>
+  </div>
+
+  <div class="section-header">Emergency Admission Certificate — Verified</div>
+  <div class="card flag-green">
+    <div class="card-title">Emergency certificate — solid document <span class="badge badge-green">Confirmed</span></div>
+    <ul class="audit-list">
+      <li>Correctly fills all mandatory fields: patient name, age/sex, attendant, hospital, department, date 10/04/2025, time 3:50 PM</li>
+      <li>Provisional diagnosis: Sepsis, CAD, AGE, URTI, Old CVA, T2DM, HTN — consistent with all other records</li>
+      <li>Treatment: Medical Management</li>
+      <li>Signed: Dr. Abhishek Vikram Singh, UPC Reg. No. 56142</li>
+      <li>Hospital stamp AL-2467 present</li>
+      <li>Time on certificate (3:50 PM) matches bill header (15:50) and LAMA summary (15:50) exactly</li>
+    </ul>
+  </div>
+  <div class="card flag-amber">
+    <div class="card-title">Minor error — relationship field <span class="badge badge-amber">Flaggable</span></div>
+    <div class="card-sub">Certificate reads "S/o Ajay Kumar Pandey" (Son of Ajay Kumar). Daya Pandey is the father; Ajay Kumar is the son. Should read "F/o Ajay Kumar Pandey" or "Attendant: Ajay Kumar Pandey (Son)." Minor but will be noticed on cross-check with CAPF card. Attach a one-paragraph correction note.</div>
+  </div>
+</div>
+
+<!-- ===== JUSTIFICATION ===== -->
+<div id="tab-justification" class="tab-panel">
+  <div class="section-header">Justification Letter — 16 June 2025</div>
+  <div class="card flag-green">
+    <div class="card-title">Authentication — all three signatories confirmed <span class="badge badge-green">Fully valid</span></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Signatory</th><th>Qualification</th><th>Registration</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Dr. Sachin Singh</td><td>MBBS, MD Anaesthesiology, PDCC Critical Care Medicine</td><td class="mono">UPMC-107017</td><td class="ok">Signed, consistent with all records</td></tr>
+          <tr><td>Dr. Arun K G</td><td>MBBS, MD, DNB Nephrology</td><td class="mono">46458</td><td class="ok">Signed; Creatinine 4.85 on Day 2 confirms legitimacy of daily nephrology involvement</td></tr>
+          <tr><td>Dr. Abhishek Vikram Singh</td><td>MD, DM Interventional Cardiologist</td><td class="mono">UPC-56142</td><td class="ok">Signed; primary consultant throughout</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card flag-amber">
+    <div class="card-title">Letter addresses only consultation query — insufficient for full resubmission <span class="badge badge-amber">Scope too narrow</span></div>
+    <div class="card-sub">The letter responds only to "Regarding consultation charged more than two." It does not address the oxygen unbundling (₹38,000), the daily CXR overuse, the non-emergency panels, or the billing format issue — which are the larger financial rejection causes. A comprehensive resubmission requires a supplementary response letter addressing each rejection point.</div>
+  </div>
+
+  <div class="card flag-red">
+    <div class="card-title">TB diagnosis inconsistency — question mark in justification vs confirmed in LAMA <span class="badge badge-red">Must align</span></div>
+    <div class="card-sub">Justification letter: "? Pulmonary TB (A15.0)" — with question mark. LAMA Summary: "Pulmonary TB (A15.0)" — confirmed, no question mark. TB Gold was positive, AKT-4 was started. The diagnosis is confirmed. The question mark in the justification letter must be removed in any resubmission correspondence. Also — Nikshay notification has not been confirmed. As A15.0 is coded in the discharge, Nikshay portal filing is mandatory.</div>
+  </div>
+</div>
+
+<!-- ===== COMPLIANCE CHECKLIST ===== -->
+<div id="tab-checklist" class="tab-panel">
+  <div class="section-header">CAPF CSPW Reimbursement Checklist — Status of All Requirements</div>
+  <div class="card">
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>#</th><th>Requirement</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">01</td><td>CAPF beneficiary card / CAPF ID</td><td class="ok">✓ Present — P3C3TMCVD, ABHA verified</td><td>None</td></tr>
+          <tr><td class="mono">02</td><td>Emergency Admission Certificate</td><td class="ok">✓ Present — 10 Apr 2025, 15:50, signed</td><td>Correct S/o → F/o error</td></tr>
+          <tr><td class="mono">03</td><td>Discharge Summary</td><td class="ok">✓ Present — LAMA Summary, ICD codes, signed</td><td>Correct gender pronoun + CVA duration errors</td></tr>
+          <tr><td class="mono">04</td><td><strong>LAMA Consent Form (signed by attendant)</strong></td><td class="crit">✗ NOT FOUND — critical gap</td><td><strong>Locate original or obtain notarized declaration from Ajay Kumar Pandey</strong></td></tr>
+          <tr><td class="mono">05</td><td>Consultant stamps on all notes</td><td class="ok">✓ Dr. Abhishek (UPC-56142) + Dr. Pritesh (UPMC-73757) on all pages</td><td>None</td></tr>
+          <tr><td class="mono">06</td><td>Day-wise treatment records</td><td class="warn">⚠ Partially present — 14–16 Apr pages partially illegible</td><td>Request clean re-scan of affected pages</td></tr>
+          <tr><td class="mono">07</td><td>Lab reports (NABL accredited)</td><td class="ok">✓ 148 pages, NABL-MELIT-02351/02379, Dr. Priyanka Rai</td><td>None</td></tr>
+          <tr><td class="mono">08</td><td>Radiology reports with radiologist registration</td><td class="ok">✓ Dr. Guddakesh Kumar, MD on all reports</td><td>None</td></tr>
+          <tr><td class="mono">09</td><td><strong>ECG — correct patient demographics</strong></td><td class="crit">✗ 10 Apr ECG has Shela desi female metadata</td><td><strong>Explanation letter from Dr. Abhishek; use 11 Apr ECG as primary</strong></td></tr>
+          <tr><td class="mono">10</td><td>Blood transfusion records</td><td class="crit">✗ Vital sign inversions; blank dual-verify fields; blood group conflict O+ vs A+</td><td><strong>Blood bank cross-match reports × 4; nursing explanation letters × 4</strong></td></tr>
+          <tr><td class="mono">11</td><td>Endoscopy consent forms (24 Apr + 29 Apr)</td><td class="warn">⚠ Not in uploaded documents</td><td>Attach signed procedure consent forms</td></tr>
+          <tr><td class="mono">12</td><td><strong>Nikshay TB Notification</strong></td><td class="crit">✗ NOT FOUND — legally mandatory for A15.0</td><td><strong>File on Nikshay portal retroactively; attach acknowledgement number</strong></td></tr>
+          <tr><td class="mono">13</td><td>AKT-4 initiated before/at LAMA</td><td class="ok">✓ Confirmed in discharge medications and clinical notes</td><td>None</td></tr>
+          <tr><td class="mono">14</td><td>Multi-specialty justification letter</td><td class="ok">✓ Present — 16 Jun 2025, all 3 consultants signed</td><td>Remove question mark from TB diagnosis in any resubmission copy</td></tr>
+          <tr><td class="mono">15</td><td>Geotagged photos</td><td class="ok">✓ Coordinates match hospital; timestamps align with admission dates</td><td>None</td></tr>
+          <tr><td class="mono">16</td><td>Pre-auth / CAPF Case ID</td><td class="ok">✓ CASE/PS1/HOSP9P135565/CAPFCSPW1610178</td><td>None</td></tr>
+          <tr><td class="mono">17</td><td><strong>Day-wise itemised bill in CGHS format</strong></td><td class="crit">✗ Bill is raw hospital MRP — no CGHS tariff codes used</td><td><strong>Restructure entirely with CP018C/MD003A codes; remove unbundled items</strong></td></tr>
+          <tr><td class="mono">18</td><td>Renal dose documentation for nephrotoxic drugs</td><td class="crit">✗ Meropenem dose unwritten; no renal adjustment notes for Colistin/Meropenem</td><td><strong>Retrospective notes from Dr. Abhishek + Dr. Arun Kumar</strong></td></tr>
+          <tr><td class="mono">19</td><td>Culture sensitivity reports</td><td class="warn">⚠ Not in uploaded documents — needed to justify Zavicepta + Colistin + Caspofungin</td><td>Attach blood/sputum/urine culture reports</td></tr>
+          <tr><td class="mono">20</td><td>Emergency Certificate relationship field</td><td class="warn">⚠ S/o error (should be F/o or attendant designation)</td><td>One-paragraph correction note</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== LAMA CLINICAL AUDIT ===== -->
+<div id="tab-lamaaudit" class="tab-panel">
+  <div class="section-header">LAMA Discharge Summary — Detailed Clinical Audit & Medical-Legal Review</div>
+
+  <div class="alert alert-red" style="margin-bottom:16px;">
+    <strong>Overall verdict:</strong> The LAMA discharge document reflects aggressive ICU management of a genuinely critically ill patient. However, it contains physiological inconsistencies, medication safety risks, template-copying errors, and medical-legal vulnerabilities that undermine its credibility as a CAPF reimbursement document. Each finding below requires a specific corrective action before resubmission.
+  </div>
+
+  <!-- SECTION A: NEURO -->
+  <div class="section-header">A. Neurological & Sensorium Audit</div>
+  <div class="card flag-red">
+    <div class="card-title">GCS E3V4M6 = Motor score 6 conflicts with "altered sensorium" narrative <span class="badge badge-red">Major inconsistency</span></div>
+    <div class="card-sub">GCS Motor 6 means the patient is <em>obeying commands perfectly</em>. This directly contradicts the admission narrative of drowsiness, altered sensorium, and possible acute CVA. A patient obeying commands perfectly cannot simultaneously be described as having depressed consciousness severe enough to require ICU admission. Either the motor score is incorrectly recorded (should be M5 or lower) or the narrative overstates the neurological impairment.</div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Parameter</th><th>Documented</th><th>Expected in Septic Encephalopathy</th><th>Critique</th></tr></thead>
+      <tbody>
+        <tr><td>GCS Motor (M)</td><td class="crit">M6 — Obeys commands</td><td>M4–M5 at best in septic encephalopathy</td><td class="crit">M6 is incompatible with drowsy altered sensorium — score needs re-evaluation or explanation</td></tr>
+        <tr><td>Neurological history</td><td class="warn">"Old CVA 3 days back" (as documented in LAMA audit)</td><td>Recent CVA requires NIHSS, power grading, CT/MRI, cranial nerve exam</td><td class="crit">No NIHSS score, no focal deficit documentation, no limb power grading, CT Brain only shows old PCA infarct</td></tr>
+        <tr><td>Discharge GCS</td><td class="ok">E4V5M6 — Fully conscious</td><td>Recovery from septic encephalopathy should be serially tracked</td><td class="warn">No intermediate GCS trend documented — jump from E3V4M6 to E4V5M6 without serial tracking</td></tr>
+        <tr><td>SpO₂ vs RR correlation</td><td class="crit">SpO₂ 84% with RR only 18/min</td><td>SpO₂ 84% physiologically drives tachypnea: RR &gt;28–30/min expected</td><td class="crit">Severe hypoxemia without tachypnea — suggests neurological suppression of respiratory drive OR documentation error in RR recording</td></tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-amber" style="margin-top:8px;"><strong>Corrective action:</strong> Dr. Abhishek or Dr. Pritesh must provide a retrospective note either correcting the GCS motor component or explaining the clinical context (e.g., patient fluctuating in consciousness, score captured during a lucid interval). The SpO₂-RR dissociation must also be addressed — either as a neuro-respiratory coupling issue from CVA or as a documentation error to be corrected.</div>
+  </div>
+
+  <!-- SECTION B: HEMODYNAMIC -->
+  <div class="section-header">B. Hemodynamic / Shock Documentation Audit</div>
+  <div class="card flag-red">
+    <div class="card-title">MAP ≈ 74.6 mmHg at admission — does not mathematically satisfy septic shock criteria <span class="badge badge-red">Diagnosis documentation gap</span></div>
+    <div class="card-sub">Admission BP 116/54 mmHg → MAP = (116 + 2×54) ÷ 3 = 74.6 mmHg. Surviving Sepsis Campaign definition of septic shock requires MAP &lt;65 mmHg despite adequate fluid resuscitation <em>plus</em> vasopressors <em>plus</em> elevated lactate (&gt;2 mmol/L). The documented admission MAP of 74.6 is above the threshold. Additionally: no lactate value is documented on the LAMA summary; no vasopressor infusion rates are documented; no fluid challenge response is recorded.</div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Shock Criterion</th><th>Required</th><th>Documented in LAMA</th><th>Verdict</th></tr></thead>
+      <tbody>
+        <tr><td>MAP &lt;65 mmHg despite fluids</td><td>Mandatory</td><td class="crit">MAP ~74.6 at admission — above threshold</td><td class="crit">Not documented as satisfied at admission</td></tr>
+        <tr><td>Vasopressors required</td><td>Mandatory</td><td class="warn">Midodrine prescribed at discharge — implies prior vasopressor use</td><td class="warn">No infusion details (drug/dose/duration) in LAMA summary</td></tr>
+        <tr><td>Lactate &gt;2 mmol/L</td><td>Required for classification</td><td class="crit">Absent from LAMA summary (ABG data shows lactate 2.6–3.2 on 26 Apr/06 May — not at admission)</td><td class="warn">Peak lactate documented in ABG records but not in LAMA narrative</td></tr>
+        <tr><td>SOFA/APACHE II score</td><td>Standard severity documentation</td><td class="crit">Absent entirely</td><td class="crit">MODS diagnosis requires organ failure scoring — completely absent</td></tr>
+        <tr><td>"Recovered" septic shock label</td><td>Recovery = vasopressor-free, MAP stable</td><td class="crit">Patient still on Midodrine (vasopressor) at discharge; still on NIV</td><td class="crit">Labelling as "recovered" while still on organ support is medically inaccurate and legally vulnerable</td></tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-amber"><strong>Corrective action:</strong> The course narrative must be amended to document: (1) peak lactate during admission (available from ABG records — 3.2 mmol/L on 06 May), (2) vasopressor details (which vasopressor, peak dose, duration), (3) the lowest MAP documented during admission (which ABG data confirms was in the septic shock range on multiple dates), (4) SOFA score at admission and at discharge. The word "Recovered" should be replaced with "Improving, hemodynamically stabilised, vasopressor-weaned, ongoing NIV support at discharge."</div>
+  </div>
+
+  <!-- SECTION C: RESPIRATORY -->
+  <div class="section-header">C. Respiratory / ICU Support Audit</div>
+  <div class="card flag-red">
+    <div class="card-title">"Recovered" label while NIV-dependent at discharge — medically inaccurate <span class="badge badge-red">Medical-legal vulnerability</span></div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Parameter</th><th>Documented</th><th>Standard Expectation</th><th>Critique</th></tr></thead>
+      <tbody>
+        <tr><td>SpO₂ at discharge</td><td class="warn">99% — but ON NIV support</td><td>Recovery means achieving acceptable SpO₂ on room air or minimal supplemental O₂</td><td class="crit">99% on NIV is not respiratory recovery. Patient cannot sustain oxygenation independently.</td></tr>
+        <tr><td>Chest examination at discharge</td><td class="warn">B/L decreased air entry — same as admission</td><td>Recovery should show improvement in aeration</td><td class="crit">Chest signs unchanged from admission to discharge — no documented respiratory improvement</td></tr>
+        <tr><td>Moderate left pleural effusion (22 Apr USG)</td><td class="warn">Documented but no pleural tap done</td><td>Unexplained pleural effusion in PTB patient requires pleural fluid analysis (ADA, cytology, culture)</td><td class="crit">No pleural tap, no ADA, no cytology. TB pleural effusion cannot be excluded without pleural fluid analysis.</td></tr>
+        <tr><td>ABG correlation</td><td class="crit">pO₂ 36–45 mmHg throughout 20 serial ABGs</td><td>P/F ratio &lt;100 = severe ARDS</td><td class="crit">P/F ratio was as low as 78 on MV. Absent from LAMA summary entirely.</td></tr>
+        <tr><td>PEEP management</td><td class="crit">PEEP 5 throughout (Berlin ARDS requires PEEP 12–18)</td><td>Lung-protective ventilation + PEEP titration</td><td class="crit">Suboptimal ventilation strategy — not mentioned in summary</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <!-- SECTION D: GI -->
+  <div class="section-header">D. Gastroenterology & Bleeding Audit</div>
+  <div class="card flag-amber">
+    <div class="card-title">Attribution of melena to hemorrhoids is clinically inaccurate <span class="badge badge-amber">Diagnosis accuracy</span></div>
+    <div class="card-sub">The LAMA summary diagnoses "Internal Hemorrhoids (K64) with Lower GI Bleed (K92.2)." However, the clinical presentation was <em>melena</em> (black tarry stools) — which is a marker of <em>upper GI</em> bleeding (digested blood from proximal source). Haemorrhoids produce bright red blood per rectum, not melena. The UGIE on 24 April confirmed gastric erosions with antral edema, erythema, and pyloric erythema — these are the true anatomical source of the melena. The diagnosis should be Upper GI Bleed secondary to Gastric Erosions (K25/K29) as the primary bleed source, with hemorrhoids as a co-finding on sigmoidoscopy.</div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Finding</th><th>Documented</th><th>Clinical reality</th><th>Verdict</th></tr></thead>
+      <tbody>
+        <tr><td>Stool character</td><td>Black/melena</td><td>Melena = upper GI source (proximal to ligament of Treitz)</td><td class="warn">Misattributed to lower GI hemorrhoids</td></tr>
+        <tr><td>UGIE (24 Apr)</td><td>Gastric erosions, antral edema, pyloric erythema, Hill's Grade III Hiatus Hernia</td><td>Upper GI pathology confirmed — the actual melena source</td><td class="ok">Should be listed as primary bleed diagnosis</td></tr>
+        <tr><td>Sigmoidoscopy (29 Apr)</td><td>Internal hemorrhoids + rectal/sigmoid erosions</td><td>Lower GI co-finding; hemorrhoids cause BRBPR not melena</td><td class="warn">Correct to list but should not be primary bleed attribution</td></tr>
+        <tr><td>Hb trend</td><td class="crit">Not documented in LAMA summary</td><td>Transfusion trigger and Hb response should be documented</td><td class="crit">No Hb values or transfusion justification in summary</td></tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-amber"><strong>Corrective action:</strong> Amend primary GI diagnosis to: "Upper GI Bleed secondary to Gastric Erosions (K25.0) + Grade III Hiatus Hernia" as primary; "Internal Haemorrhoids (K64) with Rectal Erosions" as co-diagnosis. This is clinically more accurate and better supports the endoscopy billing.</div>
+  </div>
+
+  <!-- SECTION E: INFECTION -->
+  <div class="section-header">E. Infectious Disease & Antimicrobial Audit</div>
+  <div class="card flag-red">
+    <div class="card-title">4 critical infectious disease documentation gaps <span class="badge badge-red">Supports claim challenge</span></div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Issue</th><th>What is documented</th><th>What is missing</th><th>Risk</th></tr></thead>
+      <tbody>
+        <tr><td>Ultra-broad antimicrobial regimen (Zavicepta + Colistin + Moxifloxacin + Caspofungin)</td><td class="warn">Prescribed — confirmed in clinical notes and LAMA discharge</td><td class="crit">No blood culture, sputum culture, or urine culture results showing the organism and its resistance profile to justify this combination</td><td class="crit">Without microbiological evidence, the medical director can reject these as empirical escalation without justification — ₹1.5–₹2L in antimicrobial costs at risk</td></tr>
+        <tr><td>TB diagnosis (A15.0)</td><td class="warn">QuantiFERON Gold positive</td><td class="crit">QuantiFERON detects immunological sensitisation (latent or active) — it does NOT confirm active pulmonary TB alone. Required: sputum AFB smear or CBNAAT (GeneXpert), chest imaging correlation for cavitation/infiltrates, clinical response to AKT</td><td class="warn">TB diagnosis coded as A15.0 (Active PTB) but confirmatory sputum microscopy/CBNAAT absent from documents. Nikshay notification also absent.</td></tr>
+        <tr><td>Caspofungin (antifungal)</td><td class="warn">Prescribed from 02 May onward</td><td class="crit">No blood fungal culture, β-D-glucan, or Aspergillus galactomannan result documented to confirm invasive fungal infection. Aspergillus IgG was billed but result not in LAMA summary.</td><td class="warn">Empirical Caspofungin without fungal evidence is defensible in immunocompromised ICU patients but the result of Aspergillus IgG must be attached</td></tr>
+        <tr><td>AKT prescription — dangerous nomenclature error</td><td class="crit">"TAB. AKT 4 MG" written in LAMA discharge advice</td><td>Correct formulation is "AKT-4 FDC" (Fixed Dose Combination of Isoniazid + Rifampicin + Pyrazinamide + Ethambutol)</td><td class="crit">"AKT 4 MG" does not exist as a formulation. A pharmacist or home nurse reading this literally would not know what to dispense. Medical-legal risk if patient receives wrong medication. Must be corrected immediately.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <!-- SECTION F: METABOLIC -->
+  <div class="section-header">F. Metabolic / Diabetes Audit</div>
+  <div class="card flag-red">
+    <div class="card-title">RBS 349 at admission → RBS 352 at LAMA discharge — zero glycemic improvement <span class="badge badge-red">Major therapeutic failure</span></div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Parameter</th><th>Admission</th><th>Discharge</th><th>ICU Target</th><th>Audit</th></tr></thead>
+      <tbody>
+        <tr><td>Random Blood Sugar</td><td class="crit">349 mg/dL</td><td class="crit">352 mg/dL</td><td>140–180 mg/dL</td><td class="crit">No improvement across 28 days. ABG data shows oscillations from 53 to 291 mg/dL — no sustained control achieved.</td></tr>
+        <tr><td>Insulin strategy</td><td class="warn">Lantus 12u SC at admission; scaled to 40u by later dates</td><td class="warn">Discharge on Lantus (implied)</td><td>IV insulin infusion protocol when glucose &gt;180</td><td class="crit">No continuous IV insulin infusion protocol documented despite glucose repeatedly exceeding 180 mg/dL. ABG shows glucose 291 on 07 May.</td></tr>
+        <tr><td>Glycemic documentation in LAMA</td><td class="crit">Not present in discharge plan</td><td class="crit">No insulin instructions in 22-item discharge list</td><td>All diabetic ICU discharges require insulin plan</td><td class="crit">No insulin/glucose management instructions in the LAMA discharge advice. Patient discharged at RBS 352 with no plan.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-red"><strong>Critical correction needed:</strong> The LAMA discharge advice (22 items) does not include any insulin or blood glucose monitoring instruction. A T2DM patient of 24 years with RBS 352 at discharge requires at minimum: (1) Lantus insulin dose with titration instructions, (2) short-acting insulin correction scale, (3) target glucose range, (4) glucometer strips and monitoring frequency. Inj Gluci 10ml q8h is listed but this is a hypoglycaemia rescue, not a glycemic management strategy.</div>
+  </div>
+
+  <!-- SECTION G: NUTRITION/ROUTE -->
+  <div class="section-header">G. Nutrition & Route of Administration Audit</div>
+  <div class="card flag-red">
+    <div class="card-title">Oral tablets prescribed for an RT-fed patient — aspiration and absorption safety risk <span class="badge badge-red">Medication safety</span></div>
+    <div class="card-sub">The LAMA discharge plan lists RT Feed at 50 ml/hr (confirming the patient cannot take oral intake safely) yet simultaneously prescribes multiple oral tablet formulations: Tab Sitcom Forte P/O, Tab Montair FX P/O, Tab Centrum Joints P/O, Tab Bio D3 Joint P/O, Tab Lumia D3 60K P/O, Tab Daflon 500mg P/O, Tab AKT-4 P/O, Tab Midodrine P/O, Cap VSL#3 P/O, Syp Sucral-O P/O. For an RT-fed patient with stroke history, altered swallow, and ongoing NIV dependency, "P/O" administration creates three risks: aspiration if given orally, bioavailability issues if crushed for RT (some tablets cannot be crushed — extended-release, enteric-coated), and medication errors by home nurses who may give them orally instead of via tube.</div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Medication</th><th>Route prescribed</th><th>Safe for RT crushing?</th><th>Correct instruction</th></tr></thead>
+      <tbody>
+        <tr><td>Tab AKT-4 (FDC)</td><td class="crit">P/O (but patient is RT-fed)</td><td class="ok">FDC tablets can generally be crushed and given via RT</td><td>Change to "Via RT — crush and flush" with water 30ml</td></tr>
+        <tr><td>Tab Daflon 500mg (micronised diosmin)</td><td class="warn">P/O</td><td class="warn">Micronised — crushing may reduce bioavailability</td><td>Consider liquid alternative or IV equivalent during RT phase</td></tr>
+        <tr><td>Tab Midodrine 5mg (immediate release)</td><td class="warn">P/O</td><td class="ok">Immediate-release — can be crushed</td><td>Change to "Via RT — crush"</td></tr>
+        <tr><td>Tab Lumia D3 60K (weekly)</td><td class="warn">P/O</td><td class="ok">Soft gel — can be opened</td><td>Change to "Via RT — open capsule"</td></tr>
+        <tr><td>Cap VSL#3 (probiotic)</td><td class="warn">P/O</td><td class="ok">Can be opened and given via RT</td><td>Change to "Via RT — open capsule"</td></tr>
+      </tbody>
+    </table></div>
+    <div class="alert alert-red"><strong>Corrective action:</strong> All "P/O" routes in the LAMA discharge advice must be changed to "Via RT" for any medication intended for an RT-fed patient. An amended discharge advice sheet with this correction must be prepared, signed by Dr. Abhishek, and attached to the resubmission file.</div>
+  </div>
+
+  <!-- SECTION H: DOCUMENTATION -->
+  <div class="section-header">H. Documentation & Medical-Legal Audit</div>
+  <div class="card flag-red">
+    <div class="card-title">7 documentation errors identified in LAMA Summary <span class="badge badge-red">Medical-legal vulnerabilities</span></div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>#</th><th>Error Found</th><th>Risk</th><th>Correction Required</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">1</td><td>"So she was admitted..." — male patient</td><td class="crit">Template copy-paste error; legal document identity inconsistency</td><td>Amend to "So he was admitted..."</td></tr>
+        <tr><td class="mono">2</td><td>"AKT 4 MG" — non-existent formulation</td><td class="crit">Dangerous prescription error; home nurse may not know what to dispense</td><td>Correct to "AKT-4 FDC Tablets (4 tablets OD at 6 AM)"</td></tr>
+        <tr><td class="mono">3</td><td>All P/O routes for RT-fed patient</td><td class="crit">Aspiration risk; incorrect administration route</td><td>Change all P/O to "Via RT" for oral solid formulations</td></tr>
+        <tr><td class="mono">4</td><td>Prescription item numbering: duplicate "3" / missing "6"</td><td class="warn">Risk of dose omission during home execution</td><td>Re-number the 22-item discharge list sequentially 1–22</td></tr>
+        <tr><td class="mono">5</td><td>"Recovered" septic shock — patient still on NIV + Midodrine</td><td class="crit">Medically inaccurate; insurance reviewer will question the admission severity vs discharge status contrast</td><td>Change to "Improved/stabilised; ongoing respiratory and hemodynamic support at discharge"</td></tr>
+        <tr><td class="mono">6</td><td>No insulin management in 22-item discharge plan despite RBS 352</td><td class="crit">Dangerous omission — no glycemic management for a 24-year T2DM patient with severely uncontrolled glucose</td><td>Add: Inj Lantus [dose] SC at bedtime + glucometer monitoring frequency + target RBS 140–180</td></tr>
+        <tr><td class="mono">7</td><td>Registration number inconsistency: AL-467 in some references vs AL-2467 in others</td><td class="warn">Administrative inconsistency across legal documents</td><td>Standardise to AL-2467 throughout all correspondence and records</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <!-- HOME ICU -->
+  <div class="section-header">I. Home Discharge vs Care Dependency Assessment</div>
+  <div class="card flag-red">
+    <div class="card-title">LAMA discharge plan = portable ICU dependency — exceeds home care capability <span class="badge badge-red">Patient safety concern</span></div>
+    <div class="card-sub">The LAMA discharge advice effectively requires an ICU-level home setup. The prescribing team bears medical-legal responsibility for the consequences of a discharge that mandates infrastructure the home environment cannot provide. This must be explicitly documented in the LAMA counselling note as a risk explained to the family.</div>
+    <div class="grid2" style="margin-top:10px;">
+      <div class="card flag-red" style="margin-bottom:0;">
+        <div class="card-title" style="font-size:13px;">What the discharge plan requires</div>
+        <ul class="audit-list">
+          <li>NIV/BiPAP machine with circuit management</li>
+          <li>IV infusion pumps for Zavicepta + Colistin + Caspofungin</li>
+          <li>Ryle's tube management at 50 ml/hr continuous</li>
+          <li>Skilled IV antibiotic administration (multiple daily infusions)</li>
+          <li>Vasopressor support (Midodrine 5mg q8h — indicates residual vasoplegia)</li>
+          <li>Electrolyte monitoring and correction</li>
+          <li>Blood glucose monitoring (currently absent from plan)</li>
+          <li>Nebulisation infrastructure (F+G q8h)</li>
+        </ul>
+      </div>
+      <div class="card flag-amber" style="margin-bottom:0;">
+        <div class="card-title" style="font-size:13px;">What should be documented in LAMA counselling</div>
+        <ul class="audit-list">
+          <li>Patient requires ICU-level care that cannot safely be delivered at home</li>
+          <li>Risk of NIV failure without monitoring = risk of respiratory arrest</li>
+          <li>Risk of ABO-incompatible or incorrectly administered IV antibiotics without trained nursing</li>
+          <li>Risk of hypoglycaemia/hyperglycaemia without glucose monitoring plan</li>
+          <li>Aspiration risk from oral medication administration in RT-fed patient</li>
+          <li>TB — patient should be admitted to a TB facility or DOTS center</li>
+          <li>All above explained to Ajay Kumar Pandey (son) — his signature required on LAMA form</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL CONCLUSION -->
+  <div class="section-header">Final Clinical Audit Conclusion — LAMA Summary</div>
+  <div class="card flag-amber">
+    <div class="card-title">Overall assessment — clinically serious case, documentarily deficient</div>
+    <div class="card-sub" style="margin-bottom:12px;">The LAMA discharge summary reflects management of a genuinely critically ill patient with sepsis, ARDS, GI bleed, TB, CKD, and uncontrolled T2DM. The clinical care was aggressive and appropriate in scope. However the final document contains errors that create both patient safety risks (AKT nomenclature, oral route for RT-fed patient, no insulin plan) and medical-legal vulnerabilities (MAP not satisfying shock criteria on paper, "recovered" label with ongoing organ support, identity errors).</div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Category</th><th>Severity</th><th>Impact on Claim</th><th>Fixable?</th></tr></thead>
+      <tbody>
+        <tr><td>AKT "4 MG" prescription error</td><td class="crit">Critical — patient safety</td><td class="crit">Creates doubt about document reliability</td><td class="ok">Yes — corrected discharge advice sheet</td></tr>
+        <tr><td>P/O vs RT route conflict</td><td class="crit">Critical — patient safety</td><td class="warn">Undermines discharge plan credibility</td><td class="ok">Yes — route amendment letter</td></tr>
+        <tr><td>No insulin plan at RBS 352</td><td class="crit">Critical — patient safety</td><td class="warn">Suggests inadequate discharge planning</td><td class="ok">Yes — add insulin instructions to amended plan</td></tr>
+        <tr><td>"Recovered" label with NIV + Midodrine</td><td class="warn">Medical-legal</td><td class="crit">Reviewer questions why ICU billing justified if "recovered"</td><td class="ok">Yes — replace with "stabilised, organ-support dependent"</td></tr>
+        <tr><td>MAP 74.6 vs septic shock documentation</td><td class="warn">Diagnosis documentation</td><td class="warn">Weakens MODS/shock severity justification</td><td class="ok">Yes — add peak lactate + vasopressor details from ABG/nursing records</td></tr>
+        <tr><td>No SOFA/APACHE II score</td><td class="warn">Documentation gap</td><td class="warn">Severity cannot be objectively quantified</td><td class="ok">Yes — retrospective SOFA calculation possible from available lab data</td></tr>
+        <tr><td>GCS M6 with altered sensorium</td><td class="warn">Clinical inconsistency</td><td class="warn">Reviewer may question admission necessity</td><td class="ok">Yes — clarification note explaining score context</td></tr>
+        <tr><td>Melena attributed to haemorrhoids</td><td class="warn">Diagnostic inaccuracy</td><td class="warn">Weakens GI bleed diagnosis chain</td><td class="ok">Yes — amend primary diagnosis to gastric erosion bleed</td></tr>
+        <tr><td>Gender pronoun error</td><td class="warn">Template error</td><td class="warn">Minor but reviewers notice</td><td class="ok">Yes — single-word correction</td></tr>
+        <tr><td>No culture reports for MDR antibiotics</td><td class="crit">Audit risk</td><td class="crit">₹1.5–₹2L in antimicrobial costs unjustified without sensitivity data</td><td class="warn">Partial — locate culture reports; if unavailable, write clinical justification note</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>
+
+<!-- ===== RESUBMISSION ===== -->
+<div id="tab-resubmit" class="tab-panel">
+  <div class="section-header">Resubmission Action Plan — Priority Ordered</div>
+
+  <div class="card flag-red">
+    <div class="card-title">Priority 1 — Showstoppers (must resolve before filing)</div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date"><span class="badge badge-red">Critical</span></div>
+        <div class="tl-content"><div class="tl-title">LAMA consent form</div>Locate the original signed form from Ajay Kumar Pandey. If genuinely lost, obtain a notarized declaration from him (contact: 9797743462) confirming voluntary LAMA and risks explained. Without this, the medical director cannot approve a LAMA claim.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date"><span class="badge badge-red">Critical</span></div>
+        <div class="tl-content"><div class="tl-title">Blood group conflict resolution</div>Get a signed statement from the blood bank confirming the patient's true ABO blood group. Attach all 4 cross-match compatibility certificates. Without this, the transfusion billing cannot be defended and the ABO safety question remains open.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date"><span class="badge badge-red">Critical</span></div>
+        <div class="tl-content"><div class="tl-title">ECG 10 Apr metadata correction</div>One paragraph signed letter from Dr. Abhishek Vikram Singh: "The ECG recorded on 10/04/2025 at 16:01 belongs to Mr. Sh Daya Pandey (UHID 32897). The machine header showing a female patient's demographics is a data carry-over error from the previous patient on the GE MAC2000 terminal. The correct ECG interpretation and clinical correlation are documented in the 11/04/2025 ECG which carries correct patient demographics."</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date"><span class="badge badge-red">Critical</span></div>
+        <div class="tl-content"><div class="tl-title">Nikshay TB notification</div>Log in to Nikshay portal (https://nikshay.in). File the notification for confirmed Pulmonary TB (A15.0) for this patient. The diagnosis is confirmed (TB Gold positive), AKT-4 was initiated, ICD code A15.0 is in the discharge summary. Filing retroactively is permitted. Print the acknowledgement slip (Nikshay ID) and attach to the resubmission package.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date"><span class="badge badge-red">Critical</span></div>
+        <div class="tl-content"><div class="tl-title">Bill restructuring in CGHS format</div>The hospital billing department must resubmit a completely restructured bill using CGHS tariff codes. Remove piped O₂ per hour (absorb into CP018C). Remove daily round consultations. Reduce CXR to 5–6. Reduce Echo to 3. Remove Vit D/B12/Lipids/TFT/C3. Remove duplicate Quantiferon. Remove infusion pump charges. Provide day-wise utilisation sheet: each day coded CP018C (ICU) or CP018A (ward), not both.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card flag-amber">
+    <div class="card-title">Priority 2 — Clinical justification letters (consultant team)</div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date"><span class="badge badge-amber">Dr. Abhishek</span></div>
+        <div class="tl-content"><div class="tl-title">Meropenem renal dose adjustment</div>Confirm in writing that Meropenem was administered at a renally-adjusted dose (500mg q12–24h) consistent with the patient's creatinine of 4.85 (11 Apr) and 2.25 (19 Apr), even though the dose was not written on the chart.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date"><span class="badge badge-amber">Dr. Abhishek</span></div>
+        <div class="tl-content"><div class="tl-title">DAPT continuation with platelets 20,000 + GI bleed</div>Write a clinical risk-benefit note explaining why Aspirin + Clopidogrel were maintained despite platelet count of 20,000/µL and an active upper + lower GI bleed. If the patient had a recent coronary stent requiring mandatory dual antiplatelet, state this explicitly.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date"><span class="badge badge-amber">Dr. Pritesh</span></div>
+        <div class="tl-content"><div class="tl-title">Linezolid beyond 14 days with thrombocytopenia</div>Note explaining why Linezolid was continued beyond 14 days while platelets fell to 20,000/µL, and what monitoring was in place. If an alternative was considered and rejected, state the reason.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date"><span class="badge badge-amber">Dr. Arun Kumar</span></div>
+        <div class="tl-content"><div class="tl-title">MgSO₄ continuation despite Mg 2.85 HIGH</div>Note explaining whether the 20 Apr Serum Mg result was reviewed before continuing MgSO₄. If there was a clinical reason to continue (e.g., hypokalemia refractory to KCl alone — which is a legitimate indication — and the team accepted the Mg level as acceptable), state this clearly.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date"><span class="badge badge-amber">Dr. Arun Kumar</span></div>
+        <div class="tl-content"><div class="tl-title">Colistin dose adjustment and start date</div>Note confirming Colistin was renally adjusted; explaining the creatinine rise on 07 May in context of Colistin nephrotoxicity and the monitoring plan. Also clarify why the pharmacy dispensed Colistin from late April when the clinical note shows D1 as 06 May.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card flag-green">
+    <div class="card-title">Priority 3 — Supporting documents to attach</div>
+    <ul class="audit-list">
+      <li>Blood bank cross-match compatibility reports × 4 (12 Apr, 16 Apr, 26 Apr, 01 May PRBC)</li>
+      <li>Nursing explanation letters × 4 for the vital sign column-swap errors on transfusion monitoring forms</li>
+      <li>Endoscopy consent forms — 24 Apr (UGIE) and 29 Apr (Sigmoidoscopy)</li>
+      <li>Culture sensitivity reports (blood, urine, sputum) to justify Zavicepta + Colistin + Caspofungin for XDR organism</li>
+      <li>Aspergillus IgG result (billed 01 May, ₹2,250) to justify Caspofungin</li>
+      <li>Corrected/amended LAMA discharge summary (fixing gender pronoun and CVA duration)</li>
+      <li>Corrected Emergency Certificate (fixing S/o → F/o)</li>
+      <li>Nikshay portal acknowledgement slip</li>
+    </ul>
+  </div>
+
+  <div class="section-header">Realistic Financial Outcome</div>
+  <div class="card flag-green">
+    <div class="card-title">Defensible claim estimate after all corrections</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Component</th><th>Claimed</th><th>Defensible</th><th>Note</th></tr></thead>
+        <tbody>
+          <tr><td>ICU room (28 days × CGHS panel rate)</td><td class="mono">₹1,51,200</td><td class="ok">At CGHS CP018C rate TBD</td><td>Must verify current CAPF panel ICU rate</td></tr>
+          <tr><td>Ventilator days (1 day MV + NIV days)</td><td class="mono">Claimed</td><td class="ok">Defensible with clinical documentation</td><td>NIV from ≥05 May; MV 07 May</td></tr>
+          <tr><td>Consultations (formal referrals only)</td><td class="mono">₹25,550</td><td class="ok">~₹4,200</td><td>5 specialists × 1–2 formal referrals</td></tr>
+          <tr><td>Laboratory (justified tests)</td><td class="mono">₹76,616</td><td class="ok">~₹55,000–60,000</td><td>After removing non-emergency panels + duplicates</td></tr>
+          <tr><td>Radiology (justified imaging)</td><td class="mono">₹25,165</td><td class="ok">~₹12,000–14,000</td><td>5–6 CXR + 3 Echo + CT + HRCT + USG + Endoscopy</td></tr>
+          <tr><td>High-cost medicines (IV albumin, Caspofungin, Zavicepta, Colistin, AKT)</td><td class="mono">Included in ₹9.5L</td><td class="ok">~₹3L–₹4L defensible</td><td>With culture sensitivity and albumin lab support</td></tr>
+          <tr><td>Routine medicines + consumables</td><td class="mono">Included in ₹9.5L</td><td class="ok">~₹80,000–₹1L</td><td>After removing OTC supplements and non-standard dosing</td></tr>
+          <tr><td>Procedures (PICC × 2, endoscopy × 2, catheter, physio)</td><td class="mono">~₹15,000</td><td class="ok">~₹12,000–14,000</td><td>All justified</td></tr>
+          <tr style="background:var(--bg3);"><td><strong>Total defensible estimate</strong></td><td class="crit"><strong>₹13,67,708</strong></td><td class="green"><strong>₹5.5L–₹7.5L</strong></td><td>Realistically achievable with complete documentation package</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="alert alert-green" style="margin-top:12px;">The ₹9.51L excess claim is structurally driven by the unbundled oxygen (₹38K), daily rounds (₹21K), infusion pumps (₹27K), and pharmacy billing at MRP for high-cost antibiotics and antifungals. The core medical care delivered — 28-day ICU for MODS + septic shock + ARDS + GI bleed + confirmed TB + CKD in a 62-year-old CAPF beneficiary — is genuinely complex and expensive. A well-documented resubmission should recover ₹5.5L–₹7.5L of the total claim.</div>
+  </div>
+</div>
+
+</div><!-- end main -->
+</div><!-- end layout -->
+
+<div style="max-width:1200px;margin:0 auto;padding:16px 24px 40px;border-top:1px solid var(--border);margin-top:24px;">
+  <p style="font-family:var(--mono);font-size:10px;color:var(--text3);text-align:center;line-height:2;">
+    CAPF Medical Audit Report · Mr. Sh Daya Pandey · UHID 32897 · IPD-164/25-26 · Infinity Care Hospital, Varanasi<br>
+    Documents reviewed: Bill (38pp), Lab Reports (148pp), RADIO.pdf (16pp), XRAY.pdf (30pp), Clinical Notes, LAMA Summary, Emergency Certificate, Justification Letter, ABG Reports (20 studies), Blood Investigation Reports<br>
+    Audit compiled: May 2026 · All findings based on verified source documents · For CAPF CSPW resubmission use only
+  </p>
+</div>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// Animate progress bars on load
+window.addEventListener('load', () => {
+  document.querySelectorAll('.progress-fill').forEach(el => {
+    const w = el.style.width;
+    el.style.width = '0';
+    setTimeout(() => { el.style.width = w; }, 300);
+  });
+});
+</script>
+
+</body>
+</html>
